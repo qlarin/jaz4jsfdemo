@@ -9,21 +9,19 @@
 	</title>
 </h:head>
 <h:body>
-  <h:outputStylesheet library="css" name="default.css" target="body" />
+	<h:outputStylesheet library="css" name="default.css" target="body" />
 	<div class="heading">
-	  <ui:insert name="heading">
+		<ui:insert name="heading">
        #{msg.mainHeading}
      </ui:insert>
-    </div>
-	<div class="menuAndContent">
-	 <div class="menu">
-	   <ui:insert name="menu">
-         <ui:include src="/views/main/menu.xhtml" />
-       </ui:insert>
-      </div>
-	  <div class="content">
-	     <ui:insert name="content" />
-       </div>
 	</div>
+		<div class="menu">
+			<ui:insert name="menu">
+				<ui:include src="/views/main/menu.xhtml" />
+			</ui:insert>
+		</div>
+		<div class="content">
+			<ui:insert name="content" />
+		</div>
 </h:body>
 </html>

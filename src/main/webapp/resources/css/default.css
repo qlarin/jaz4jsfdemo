@@ -1,49 +1,70 @@
 body {
-   margin: 0;
+   margin: 10px;
    padding: 0;
    background-color:  lightGray;
    font-family: Verdana, sans-serif;
    font-size: 0.9em;
 }
 
+#menubars ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menubars ul li {
+	float: left;
+}
+
+#menubars ul li.lastbar {
+	float: right;
+}
+
+#menubars ul li a:link, a:visited {
+	display: table-cell;
+	width: 200px;
+	height: 60px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #B80000;
+    text-align: center;
+    vertical-align:middle;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#menubars ul li a:hover, a:active {
+    background-color: #A60000;
+}
+
 .heading {
-  padding: 10px;
-  background: #FFFFFF;
-  border: 1px solid blue;
+  padding: 10px 10px 10px 10px;
+  background-color: #FFFFFF;
+  background-image: url("../images/logo.png") no-repeat;
+  border: 1px solid black;
   font-size: 1.4em;
   font-style: italic;
   font-family: Verdana;
-  text-align: center;
-  height: 50px;
-}
-
-.menuAndContent {
-  width: 100%;
-  height: 100%;
+  text-align: left;
+  height: 60px;
+  margin: 0px 0px 1px 0px;
 }
 
 .menu {
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  border: thin solid blue;
-  position: absolute;
-  left: 10px;
-  height: 80%;
-  width: 200px;
-  background: #FFFFFF;
-  top: 90px;
+  border: 1px solid black;
+  margin: 1px 0px 1px 0px;
+  background: #B80000;	
+  position:relative;
+  height: 60px;
 }
 
 .content {
   padding-right: 20px;
   padding-left: 20px;
   padding-bottom: 20px;
-  border: thin solid blue;
+  border: thin solid black;
   background: #FFFFFF;	
-  position:absolute;
-  left: 225px; 
-  right: 65px;
-  top: 90px;
-  height: 80%;
+  position:relative;
+  height: 560px;
 }
