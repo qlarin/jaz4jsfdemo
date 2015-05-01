@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+
+		<p>#{msg.patientSearchInfo}</p>
+
+		
+			<h:dataTable value="#{patientBean.allPatients}" var="patient"
+				border="1" cellpadding="3" cellspacing="10">
+				<h:column>
+					<f:facet name="header">#{msg.patientFirstNameLabel}</f:facet>
+        #{patient.firstName}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientLastNameLabel}</f:facet>
+        #{patient.lastName}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.patientPinLabel}</f:facet>
+        #{patient.pin}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientDateOfBirthLabel}</f:facet>
+        #{patient.dateOfBirth}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientAddressLabel}</f:facet>
+        #{patient.address}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientPhoneNumberLabel}</f:facet>
+        #{patient.phoneNumber}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientWeightLabel}</f:facet>
+        #{patient.weight}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.patientHeightLabel}</f:facet>
+        #{patient.height}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+					<h:commandButton value="#{msg.actionDelete}"
+						action="#{patientBean.deletePatient}"/>
+				</h:column>
+			</h:dataTable>
+		
+	</ui:define>
+
+</ui:composition>

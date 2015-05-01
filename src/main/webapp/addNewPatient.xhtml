@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h:form id="patientform">
+			<f:event type="postValidate" listener="#{patientBean.validatePinDob}" />
+			<h:panelGrid columns="2">
+				<h:outputText value="#{msg.patientFirstNameLabel}" />
+				<h:inputText id="firstName" value="#{patientBean.patient.firstName}"
+					required="#{true}" />
+
+				<h:outputText value="#{msg.patientLastNameLabel}" />
+				<h:inputText id="lastName" value="#{patientBean.patient.lastName}"
+					required="#{true}" />
+
+				<h:outputText value="#{msg.patientPinLabel}" />
+				<h:inputText id="pin" value="#{patientBean.patient.pin}"
+					validator="#{patientBean.uniquePin}" required="#{true}">
+					<f:validator validatorId="pinValidator" />
+				</h:inputText>
+
+				<h:outputText value="#{msg.patientDateOfBirthLabel}" />
+				<h:inputText id="dob" value="#{patientBean.patient.dateOfBirth}">
+					<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+				</h:inputText>
+
+				<h:outputText value="#{msg.patientAddressLabel}" />
+				<h:inputText id="address" value="#{patientBean.patient.address}" />
+
+				<h:outputText value="#{msg.patientPhoneNumberLabel}" />
+				<h:inputText id="phoneNumber"
+					value="#{patientBean.patient.phoneNumber}" />
+
+				<h:outputText value="#{msg.patientWeightLabel}" />
+				<h:inputText id="weight" value="#{patientBean.patient.weight}">
+					<f:validateDoubleRange minimum="20.5" maximum="150.5" />
+				</h:inputText>
+
+				<h:outputText value="#{msg.patientHeightLabel}" />
+				<h:inputText id="height" value="#{patientBean.patient.height}">
+					<f:validateDoubleRange minimum="40" maximum="250" />
+				</h:inputText>
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.patientFormOKButton}"
+				action="#{patientBean.addPatient}" />
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

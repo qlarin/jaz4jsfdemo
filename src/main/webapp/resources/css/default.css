@@ -41,7 +41,7 @@ body {
 .heading {
   padding: 10px 10px 10px 10px;
   background-color: #FFFFFF;
-  background-image: url("../images/logo.png") no-repeat;
+  background-repeat: no-repeat;
   border: 1px solid black;
   font-size: 1.4em;
   font-style: italic;
@@ -49,6 +49,7 @@ body {
   text-align: left;
   height: 60px;
   margin: 0px 0px 1px 0px;
+  background-image: url("#{resource['images/logo.png']}");
 }
 
 .menu {
