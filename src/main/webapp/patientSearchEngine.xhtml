@@ -8,9 +8,8 @@
 
 		<p>#{msg.patientSearchInfo}</p>
 
-		
-			<h:dataTable value="#{patientBean.allPatients}" var="patient"
-				border="1" cellpadding="3" cellspacing="10">
+		<h:form>
+			<h:dataTable value="#{patientBean.allPatients}" var="patient" border="1">
 				<h:column>
 					<f:facet name="header">#{msg.patientFirstNameLabel}</f:facet>
         #{patient.firstName}
@@ -48,10 +47,10 @@
 				<h:column>
 					<f:facet name="header">#{msg.action}</f:facet>
 					<h:commandButton value="#{msg.actionDelete}"
-						action="#{patientBean.deletePatient}"/>
+						action="#{patientBean.deletePatient}" />
 				</h:column>
 			</h:dataTable>
-		
+		</h:form>
 	</ui:define>
 
 </ui:composition>
