@@ -1,6 +1,7 @@
 package com.jaz.jaz4jsfdemo.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -22,6 +23,7 @@ public class PatientManager {
 		newPatient.setPhoneNumber(patient.getPhoneNumber());
 		newPatient.setWeight(patient.getWeight());
 		newPatient.setHeight(patient.getHeight());
+		newPatient.setDateOfRegister(patient.getDateOfRegister());
 		
 		db.add(newPatient);
 	}
@@ -43,5 +45,7 @@ public class PatientManager {
 		public List<Patient> getAllPatients(){
 			return db;
 	}
+		
+		
 	
 }

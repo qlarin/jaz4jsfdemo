@@ -15,8 +15,9 @@ public class Patient {
 	private String phoneNumber = "";
 	private double weight;
 	private int height;
-
-	@Size(min = 2, max = 20)
+	private Date dateOfRegister = new Date();
+	
+	@Size(min = 2, max = 50)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -25,7 +26,7 @@ public class Patient {
 		this.firstName = firstName;
 	}
 
-	@Size(min = 2, max = 20)
+	@Size(min = 2, max = 50)
 	public String getLastName() {
 		return lastName;
 	}
@@ -34,7 +35,7 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-	@Size(min = 2)
+	@Size(min = 11)
 	public String getPin() {
 		return pin;
 	}
@@ -82,6 +83,14 @@ public class Patient {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	public Date getDateOfRegister() {
+		return dateOfRegister;
+	}
+
+	public void setDateOfRegister(Date dateOfRegister) {
+		this.dateOfRegister = dateOfRegister;
 	}
 
 }

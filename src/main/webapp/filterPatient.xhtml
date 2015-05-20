@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:rich="http://richfaces.org/rich">
+
+
+	<ui:define name="content">
+
+		<p>#{msg.filterFormInformation}</p>
+		<h:form id="filterForm">
+			<rich:messages />
+			<rich:dataTable value="#{patientBean.allPatients}" var="p" id="table" filterVar="filterValue">
+				<f:facet name="noData">
+                	#{msg.nothingFoundInformation}
+            	</f:facet>
+				<f:facet name="header">
+					<rich:columnGroup>
+						<rich:column rowspan="2">
+							<h:panelGroup>
+								<h:outputText value="#{msg.patientFirstNameLabel}" />
+								<h:inputText value="#{patientsFilterBean.firstNameFilter}"
+									style="width:65px">
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column rowspan="2">
+							<h:panelGroup>
+								<h:outputText value="#{msg.patientLastNameLabel}" />
+								<h:inputText value="#{patientsFilterBean.lastNameFilter}"
+									style="width:65px">
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column rowspan="2">
+							<h:panelGroup>
+								<h:outputText value="#{msg.patientPinLabel}" />
+								<h:inputText value="#{patientsFilterBean.pinFilter}"
+									style="width:65px">
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column colspan="2">
+							<h:outputText value="#{msg.patientDateOfBirthLabel}" />
+						</rich:column>
+						<rich:column colspan="2">
+							<h:outputText value="#{msg.patientWeightLabel}" />
+						</rich:column>
+						<rich:column colspan="2">
+							<h:outputText value="#{msg.patientHeightLabel}" />
+						</rich:column>
+						<rich:column colspan="2">
+							<h:outputText value="#{msg.patientDateOfRegisterLabel}" />
+						</rich:column>
+						<rich:column breakRowBefore="true">
+							<h:panelGroup>
+								<h:outputText value="#{msg.objFromLabel}" />
+								<h:inputText value="#{patientsFilterBean.dobFromFilter}"
+									style="width:65px">
+									<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objToLabel}" />
+								<h:inputText value="#{patientsFilterBean.dobToFilter}"
+									style="width:65px">
+									<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objFromLabel}" />
+								<h:inputText value="#{patientsFilterBean.weightFromFilter}"
+									style="width:40px">
+									<f:converter converterId="javax.faces.Double" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objToLabel}" />
+								<h:inputText value="#{patientsFilterBean.weightToFilter}"
+									style="width:40px">
+									<f:converter converterId="javax.faces.Double" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objFromLabel}" />
+								<h:inputText value="#{patientsFilterBean.heightFromFilter}"
+									style="width:40px">
+									<f:converter converterId="javax.faces.Integer" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objToLabel}" />
+								<h:inputText value="#{patientsFilterBean.heightToFilter}"
+									style="width:40px">
+									<f:converter converterId="javax.faces.Integer" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objFromLabel}" />
+								<h:inputText value="#{patientsFilterBean.dorFromFilter}"
+									style="width:65px">
+									<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+						<rich:column>
+							<h:panelGroup>
+								<h:outputText value="#{msg.objToLabel}" />
+								<h:inputText value="#{patientsFilterBean.dorToFilter}"
+									style="width:65px">
+									<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+									<a4j:ajax event="blur" render="table" execute="@this" />
+								</h:inputText>
+							</h:panelGroup>
+						</rich:column>
+					</rich:columnGroup>
+				</f:facet>
+				<rich:column 
+					filterValue="#{patientsFilterBean.firstNameFilter}"
+					filterExpression="#{empty filterValue or fn:startsWith(p.firstName, filterValue)}"
+					filterType="custom">
+					<h:outputText value="#{p.firstName}" />
+				</rich:column>
+				<rich:column filterValue="#{patientsFilterBean.lastNameFilter}"
+					filterExpression="#{fn:containsIgnoreCase(p.lastName, patientsFilterBean.lastNameFilter)}"
+					filterType="custom">
+					<h:outputText value="#{p.lastName}" />
+				</rich:column>
+				<rich:column filterValue="#{patientsFilterBean.pinFilter}"
+					filterExpression="#{fn:containsIgnoreCase(p.pin, patientsFilterBean.pinFilter)}"
+					filterType="custom">
+					<h:outputText value="#{p.pin}" />
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.dobFromFilterImpl}"
+					filterType="custom">
+					<h:outputText value="#{p.dateOfBirth}">
+						<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.dobToFilterImpl}"
+					filterType="custom">
+					<h:outputText value="" />
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.weightFromFilterImpl}"
+					filterType="custom">
+					<h:outputText value="#{p.weight}" />
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.weightToFilterImpl}"
+					filterType="custom">
+					<h:outputText value="" />
+				</rich:column>
+				<rich:column
+					filter="#{patientsFilterBean.heightFromFilterImpl}"
+					filterType="custom">
+					<h:outputText value="#{p.height}" />
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.heightToFilterImpl}"
+					filterType="custom">
+					<h:outputText value="" />
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.dorFromFilterImpl}"
+					filterType="custom">
+					<h:outputText value="#{p.dateOfRegister}">
+						<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</rich:column>
+				<rich:column filter="#{patientsFilterBean.dorToFilterImpl}"
+					filterType="custom">
+					<h:outputText value="" />
+				</rich:column>
+			</rich:dataTable>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

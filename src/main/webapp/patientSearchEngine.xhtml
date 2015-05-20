@@ -3,53 +3,133 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/templates/default.xhtml">
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
 	<ui:define name="content">
 
 		<p>#{msg.patientSearchInfo}</p>
 
 		<h:form>
-			<h:dataTable value="#{patientBean.allPatients}" var="patient" border="1">
-				<h:column>
-					<f:facet name="header">#{msg.patientFirstNameLabel}</f:facet>
-        #{patient.firstName}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientLastNameLabel}</f:facet>
-        #{patient.lastName}
-      </h:column>
-
-				<h:column>
-					<f:facet name="header">#{msg.patientPinLabel}</f:facet>
-        #{patient.pin}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientDateOfBirthLabel}</f:facet>
-        #{patient.dateOfBirth}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientAddressLabel}</f:facet>
-        #{patient.address}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientPhoneNumberLabel}</f:facet>
-        #{patient.phoneNumber}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientWeightLabel}</f:facet>
-        #{patient.weight}
-      </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.patientHeightLabel}</f:facet>
-        #{patient.height}
-      </h:column>
-
-				<h:column>
-					<f:facet name="header">#{msg.action}</f:facet>
-					<h:commandButton value="#{msg.actionDelete}"
-						action="#{patientBean.deletePatient}" />
-				</h:column>
-			</h:dataTable>
+			<rich:dataTable value="#{patientBean.allPatients}" var="p" id="table"
+				sortPriority="#{patientsSortingBean.sortPriorities}"
+				selectionMode="none">
+				
+				<rich:column sortBy="#{p.dateOfRegister}"
+					sortOrder="#{patientsSortingBean.sortsOrders['dateOfRegister']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientDateOfRegisterLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="dateOfRegister" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['dateOfRegister']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['dateOfRegister']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.dateOfRegister}">
+						<f:convertDateTime dateStyle="short" pattern="dd.MM.yyyy" />
+					</h:outputText>
+				</rich:column>
+				<rich:column sortBy="#{p.firstName}"
+					sortOrder="#{patientsSortingBean.sortsOrders['firstName']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientFirstNameLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="firstName" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['firstName']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['firstName']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.firstName}"/>
+				</rich:column>
+				<rich:column sortBy="#{p.lastName}"
+					sortOrder="#{patientsSortingBean.sortsOrders['lastName']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientLastNameLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="lastName" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['lastName']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['lastName']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.lastName}" />
+				</rich:column>
+				<rich:column sortBy="#{p.pin}"
+					sortOrder="#{patientsSortingBean.sortsOrders['pin']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientPinLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="pin" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['pin']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['pin']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.pin}"/>
+				</rich:column>
+				<rich:column sortBy="#{p.weight}"
+					sortOrder="#{patientsSortingBean.sortsOrders['weight']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientWeightLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="weight" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['weight']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['weight']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.weight}"/>
+				</rich:column>
+				<rich:column sortBy="#{p.height}"
+					sortOrder="#{patientsSortingBean.sortsOrders['height']}"
+					sortType="custom">
+					<f:facet name="header">
+						<h:panelGrid columns="2">
+							<a4j:commandLink execute="@this"
+								value="#{msg.patientHeightLabel}" render="table"
+								action="#{patientsSortingBean.sort}">
+								<f:param name="sortProperty" value="height" />
+							</a4j:commandLink>
+							<h:outputText value="↓"
+								rendered="#{patientsSortingBean.sortsOrders['height']=='descending'}" />
+							<h:outputText value="↑"
+								rendered="#{patientsSortingBean.sortsOrders['height']=='ascending'}" />
+						</h:panelGrid>
+					</f:facet>
+					<h:outputText value="#{p.height}"/>
+				</rich:column>
+				
+				
+				
+			</rich:dataTable>
 		</h:form>
 	</ui:define>
 
