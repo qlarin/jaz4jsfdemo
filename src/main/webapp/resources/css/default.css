@@ -48,16 +48,23 @@ body {
   font-family: Verdana;
   text-align: left;
   height: 60px;
-  margin: 0px 0px 1px 0px;
   background-image: url("#{resource['images/logo.png']}");
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1px;
+  width: 1020px;
+  position:relative;
 }
 
 .menu {
   border: 1px solid black;
-  margin: 1px 0px 1px 0px;
   background: #B80000;	
   position:relative;
   height: 60px;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1040px;
 }
 
 .content {
@@ -68,4 +75,8 @@ body {
   background: #FFFFFF;	
   position:relative;
   height: 560px;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
 }
