@@ -8,64 +8,93 @@
 	xmlns:a4j="http://richfaces.org/a4j">
 
 	<ui:define name="content">
-		<p>#{msg.addPatientFormInformation}</p>
-		<rich:panel>
+		<br />
+
+
+		<rich:panel header="#{msg.addPatientFormInformation}">
 			<h:form id="patientform">
 
 				<f:event type="postValidate"
 					listener="#{patientBean.validatePinDob}" />
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<h:outputText value="#{msg.patientFirstNameLabel}" />
 					<h:inputText id="firstName"
-						value="#{patientBean.patient.firstName}" required="#{true}" />
+						value="#{patientBean.patient.firstName}" label="firstName">
+						<f:validateRequired />
+						<rich:validator />
+					</h:inputText>
+					<rich:message for="firstName" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientLastNameLabel}" />
 					<h:inputText id="lastName" value="#{patientBean.patient.lastName}"
-						required="#{true}" />
+						label="lastName">
+						<f:validateRequired />
+						<rich:validator />
+					</h:inputText>
+					<rich:message for="lastName" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientPinLabel}" />
 					<h:inputText id="pin" value="#{patientBean.patient.pin}"
-						validator="#{patientBean.uniquePin}" required="#{true}">
+						validator="#{patientBean.uniquePin}" label="pin">
 						<f:validator validatorId="pinValidator" />
+						<f:validateRequired />
+						<rich:validator />
 					</h:inputText>
+					<rich:message for="pin" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientDateOfBirthLabel}" />
-					<h:inputText id="dob" value="#{patientBean.patient.dateOfBirth}"
-						required="#{true}">
-						<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
-					</h:inputText>
+					<rich:calendar id="dob" label="dob"
+						value="#{patientBean.patient.dateOfBirth}"
+						datePattern="dd.MM.yyyy">
+						<f:validateRequired />
+						<rich:validator />
+					</rich:calendar>
+					<rich:message for="dob" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientAddressLabel}" />
 					<h:inputText id="address" value="#{patientBean.patient.address}"
-						required="#{true}" />
+						label="address">
+						<f:validateRequired />
+						<rich:validator />
+					</h:inputText>
+					<rich:message for="address" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientPhoneNumberLabel}" />
 					<h:inputText id="phoneNumber"
-						value="#{patientBean.patient.phoneNumber}">
+						value="#{patientBean.patient.phoneNumber}" label="phoneNumber">
 						<f:validator validatorId="phoneValidator" />
+						<rich:validator />
 					</h:inputText>
+					<rich:message for="phoneNumber" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientWeightLabel}" />
-					<h:inputText id="weight" value="#{patientBean.patient.weight}">
-						<!-- 					<f:validateDoubleRange minimum="20.5" maximum="150.5" /> -->
-					</h:inputText>
+					<rich:inputNumberSpinner id="weight" label="weight"
+						value="#{patientBean.patient.weight}" maxValue="150"
+						inputSize="20">
+						<f:converter converterId="javax.faces.Double" />
+					</rich:inputNumberSpinner>
+					<rich:message for="weight" ajaxRendered="true" />
 
 					<h:outputText value="#{msg.patientHeightLabel}" />
-					<h:inputText id="height" value="#{patientBean.patient.height}">
-						<!-- 					<f:validateDoubleRange minimum="40" maximum="250" /> -->
-					</h:inputText>
+					<rich:inputNumberSpinner id="height" label="height"
+						value="#{patientBean.patient.height}" maxValue="220"
+						inputSize="20" />
+					<rich:message for="height" ajaxRendered="true" />
+
 				</h:panelGrid>
 
-				<h:commandButton value="#{msg.patientFormOKButton}"
+				<a4j:commandButton value="#{msg.patientFormOKButton}"
 					action="#{patientBean.addPatient}" />
 
 				<h:panelGrid>
-					<h:messages id="messages" showDetail="#{true}"
-						showSummary="#{false}" />
+					<rich:messages for="patientform" style="color:red" id="messages"
+						showDetail="#{false}" showSummary="#{true}" />
 				</h:panelGrid>
-
 			</h:form>
 		</rich:panel>
+
+
+
 	</ui:define>
 
 </ui:composition>

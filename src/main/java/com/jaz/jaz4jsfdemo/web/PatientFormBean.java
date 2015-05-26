@@ -26,7 +26,7 @@ public class PatientFormBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Patient patient = new Patient();
 	private ListDataModel<Patient> patients = new ListDataModel<Patient>();
-	
+
 	@Inject
 	private PatientManager pm;
 
@@ -37,23 +37,23 @@ public class PatientFormBean implements Serializable {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	
-	public ListDataModel<Patient> getAllPatients(){
+
+	public ListDataModel<Patient> getAllPatients() {
 		patients.setWrappedData(pm.getAllPatients());
 		return patients;
 	}
-	
-	public String addPatient(){
+
+	public String addPatient() {
 		pm.addPatient(patient);
 		return "showPatients";
 	}
-	
-	public String deletePatient(){
+
+	public String deletePatient() {
 		Patient patientToDelete = patients.getRowData();
 		pm.deletePatient(patientToDelete);
 		return null;
 	}
-	
+
 	public void uniquePin(FacesContext context, UIComponent component,
 			Object value) {
 
@@ -68,7 +68,7 @@ public class PatientFormBean implements Serializable {
 			}
 		}
 	}
-	
+
 	public void validatePinDob(ComponentSystemEvent event) {
 
 		UIForm form = (UIForm) event.getComponent();
@@ -86,9 +86,10 @@ public class PatientFormBean implements Serializable {
 
 			if (!twoDigitsOfPin.equals(lastDigitsOfDob)) {
 				FacesContext context = FacesContext.getCurrentInstance();
-				context.addMessage(form.getClientId(), new FacesMessage(
-						"PIN doesn't match date of birth"));
+				context.addMessage(form.getClientId(), new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				"PIN doesn't match date of birth", null));
 				context.renderResponse();
+				
 			}
 		}
 	}

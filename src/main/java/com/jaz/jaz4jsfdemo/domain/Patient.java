@@ -35,7 +35,6 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-	@Size(min = 11)
 	public String getPin() {
 		return pin;
 	}
