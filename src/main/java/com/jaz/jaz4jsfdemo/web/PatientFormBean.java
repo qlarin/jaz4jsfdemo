@@ -53,7 +53,7 @@ public class PatientFormBean implements Serializable {
 		pm.deletePatient(patientToDelete);
 		return null;
 	}
-
+	
 	public void uniquePin(FacesContext context, UIComponent component,
 			Object value) {
 

@@ -1,51 +1,33 @@
 package com.jaz.jaz4jsfdemo.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.jaz.jaz4jsfdemo.domain.Patient;
 
-@ApplicationScoped
+@Stateless
 public class PatientManager {
-	private List<Patient> db = new ArrayList<Patient>();
+	
+	
+	@PersistenceContext
+	EntityManager em;
 	
 	public void addPatient(Patient patient){
-		Patient newPatient = new Patient();
-		
-		newPatient.setFirstName(patient.getFirstName());
-		newPatient.setLastName(patient.getLastName());
-		newPatient.setPin(patient.getPin());
-		newPatient.setDateOfBirth(patient.getDateOfBirth());
-		newPatient.setAddress(patient.getAddress());
-		newPatient.setPhoneNumber(patient.getPhoneNumber());
-		newPatient.setWeight(patient.getWeight());
-		newPatient.setHeight(patient.getHeight());
-		newPatient.setDateOfRegister(patient.getDateOfRegister());
-		
-		db.add(newPatient);
+		patient.setId(null);
+		em.persist(patient);
 	}
 	
 	public void deletePatient(Patient patient){
-		Patient patientToRemove = null;
-		
-		for(Patient p : db){
-			if(patient.getPin().equals(p.getPin())){
-				patientToRemove = p;
-				break;
-			}
-		}
-		if(patientToRemove != null){
-			db.remove(patientToRemove);
-		}
+		patient = em.find(Patient.class, patient.getId());
+		em.remove(patient);
 		
 	}
+		@SuppressWarnings("unchecked")
 		public List<Patient> getAllPatients(){
-			return db;
+			return em.createNamedQuery("patient.all").getResultList();
 	}
 		
-		
-	
 }

@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>jaz4jsfdemo</display-name>
-
 	<context-param>
 		<param-name>org.richfaces.skin</param-name>
 		<param-value>ruby</param-value>

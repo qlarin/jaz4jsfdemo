@@ -2,11 +2,25 @@ package com.jaz.jaz4jsfdemo.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+@Entity
+@NamedQueries({
+	@NamedQuery(name = "patient.all", query = "Select p from Patient p")
+})
 public class Patient {
 
+	private Long id;
+	
 	private String firstName = "unknown";
 	private String lastName = "unknown";
 	private String pin = "";
@@ -16,6 +30,16 @@ public class Patient {
 	private double weight;
 	private int height;
 	private Date dateOfRegister = new Date();
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id){
+		this.id = id;
+	}
 	
 	@Size(min = 2, max = 50)
 	public String getFirstName() {
@@ -44,6 +68,7 @@ public class Patient {
 	}
 
 	@Past
+	@Temporal(TemporalType.DATE)
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -84,6 +109,7 @@ public class Patient {
 		this.height = height;
 	}
 
+	@Temporal(TemporalType.DATE)
 	public Date getDateOfRegister() {
 		return dateOfRegister;
 	}
@@ -92,4 +118,14 @@ public class Patient {
 		this.dateOfRegister = dateOfRegister;
 	}
 
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", pin=" + pin + ", dateOfBirth=" + dateOfBirth
+				+ ", address=" + address + ", phoneNumber=" + phoneNumber
+				+ ", weight=" + weight + ", height=" + height + "]";
+	}
+
+	
+	
 }
